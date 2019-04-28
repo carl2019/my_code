@@ -2,7 +2,6 @@
 递归：1.自己调用自己  2.要有出口
 斐波那契数列：
 f(1) = f(2) = 1    f(n) = f(n-1) + f(n-2)*/
-
 #include <stdio.h>
 int fab(int n)
 {
@@ -42,7 +41,6 @@ int main()
 }
 
 //2.编写一个函数实现n^k，使用递归实现 
-
 #include <stdio.h>
 int func(int n, int k)
 {
@@ -84,7 +82,6 @@ int main()
 /*4. 编写一个函数reverse_string(char * string)（递归实现）
 实现：将参数字符串中的字符反向排列。
 要求：不能使用C函数库中的字符串操作函数。*/
-
 #include <stdio.h>
 #include <assert.h>
 char* reverse_string(char* str)
@@ -107,7 +104,6 @@ int main()
 }
 
 //5.递归和非递归分别实现strlen 
-
 #include <stdio.h>
 #include <assert.h>
 int my_strlen1(const char* str)
@@ -143,7 +139,6 @@ int main()
 }
 
 //6.递归和非递归分别实现求n的阶乘
-
 #include <stdio.h>
 int func_r(int n)
 {
@@ -174,9 +169,7 @@ int main()
 }
 
 //7.递归方式实现打印一个整数的每一位 
-
 #include <stdio.h>
-
 int print(int n)
 {
 	if(n > 9)
