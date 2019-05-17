@@ -22,9 +22,10 @@ void HeapPrint();
 void HeapPush(Heap* hp, HPDataType x);
 void HeapPop(Heap* hp);
 HPDataType HeapTop(Heap* hp);
-int HeapSize(Heap* hp);
-int HeapEmpty(Heap* hp);
+size_t HeapSize(Heap* hp);
+size_t HeapEmpty(Heap* hp);
 
+void TopK();
 // ∂—≈≈–Ú
 void HeapSort(int* a, int n);
 void HeapTest1();
