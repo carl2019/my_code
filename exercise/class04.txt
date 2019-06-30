@@ -1,0 +1,75 @@
+// vector::capacity
+#include <iostream>
+#include <vector>
+int main()
+{
+	size_t sz;
+	std::vector<int> foo;
+	sz = foo.capacity();
+	std::cout << "making foo grow:\n";
+	for (int i = 0; i<100; ++i)
+	{
+		foo.push_back(i);
+		if (sz != foo.capacity())
+		{
+			sz = foo.capacity();
+			std::cout << "capacity changed: " << sz << '\n';
+		}
+	}
+}
+// vector::reserve
+#include <iostream>
+#include <vector>
+int main()
+{
+	size_t sz;
+	std::vector<int> foo;
+	sz = foo.capacity();
+	std::cout << "making foo grow:\n";
+	for (int i = 0; i<100; ++i)
+	{
+		foo.push_back(i);
+		if (sz != foo.capacity()) 
+		{
+			sz = foo.capacity();
+			std::cout << "capacity changed: " << sz << '\n';
+		}
+	}
+	std::vector<int> bar;
+	sz = bar.capacity();
+	bar.reserve(100);
+	std::cout << "making bar grow:\n";
+	for (int i = 0; i<100; ++i)
+	{
+		bar.push_back(i);
+		if (sz != bar.capacity())
+		{
+			sz = bar.capacity();
+			std::cout << "capacity changed: " << sz << '\n';
+		}
+	}
+	return 0;
+}
+// vector::resize
+#include <iostream>
+#include <vector>
+int main()
+{
+	std::vector<int> myvector;
+	// set some initial content:
+	for (int i = 1; i < 10; i++)
+	{
+		myvector.push_back(i);
+
+	}
+	myvector.resize(5);
+	myvector.resize(8, 100);
+	myvector.resize(12);
+	std::cout << "myvector contains:";
+	for (int i = 0; i < myvector.size(); i++)
+	{
+		std::cout << ' ' << myvector[i];
+	}
+	std::cout << '\n';
+	return 0;
+}
