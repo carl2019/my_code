@@ -1,0 +1,53 @@
+// 1.final 修饰基类的虚函数不能被派生类重写
+class Car
+{
+public:
+	virtual void Drive() final {}
+};
+class Benz :public Car
+{
+public:
+	virtual void Drive() { cout << "Benz-舒适" << endl; }
+};
+class Car{
+public:
+	virtual void Drive(){}
+};
+
+// 1.我们增加一个派生类Derive去继承Base
+// 2.Derive中重写Func1
+// 3.Base再增加一个虚函数Func2和一个普通函数Func3
+class Base
+{
+public:
+	virtual void Func1()
+	{
+		cout << "Base::Func1()" << endl;
+	}
+	virtual void Func2()
+	{
+		cout << "Base::Func2()" << endl;
+	}
+	void Func3()
+	{
+		cout << "Base::Func3()" << endl;
+	}
+private:
+	int _b = 1;
+};
+class Derive : public Base
+{
+public:
+	virtual void Func1()
+	{
+		cout << "Derive::Func1()" << endl;
+	}
+private:
+	int _d = 2;
+};
+int main()
+{
+	Base b;
+	Derive d;
+	return 0;
+}
