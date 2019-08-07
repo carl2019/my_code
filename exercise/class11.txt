@@ -1,0 +1,70 @@
+class Solution {
+public:
+    int backPackII(int m, vector<int> &A, vector<int> &V) {
+        // write your code here
+        int row = A.size();
+        vector<vector<int>> maxV(row + 1, vector<int>(m + 1, 0));
+        for(int i = 1; i <= row; ++i)
+        {
+            for(int j = 1; j <= m; ++j)
+            {
+                if(A[i - 1] > j)
+                    maxV[i][j] = maxV[i - 1][j];
+                else
+                    maxV[i][j] =max(maxV[i - 1][j], maxV[i - 1][j - A[i - 1]] + V[i - 1]);
+            }
+        }
+        return maxV[row][m];
+    }
+};
+
+class Solution{
+public:
+	int minCut(string s) 
+	{
+		if (s.empty()) return 0;
+		int len = s.size();
+		vector<int> cut;
+		// F(i)初始化
+		for (int i = 0; i < 1 + len; ++i)
+		{
+			cut.push_back(i - 1);
+		}
+		vector<vector<bool> > mat = getMat(s);
+		for (int i = 1; i < 1 + len; ++i)
+		{
+			for (int j = 0; j < i; ++j) 
+			{
+				if (mat[j][i - 1]) {
+					cut[i] = min(cut[i], 1 + cut[j]);
+			}
+		}
+		return cut[len];
+	}
+	vector<vector<bool> > getMat(string s) 
+	{
+		int len = s.size();
+		vector<vector<bool> > mat = vector<vector<bool> >(len, vector<bool>(len, false));
+		for (int i = len - 1; i >= 0; --i)
+		{
+			for (int j = i; j < len; ++j)
+			{
+				if (j == i)
+				{
+					// 单字符为回文字符串
+					mat[i][j] = true;
+				}
+				else if (j == i + 1)
+				{
+					// 相邻字符如果相同，则为回文字符串
+					mat[i][j] = (s[i] == s[j]);
+				}
+				else 
+				{
+					mat[i][j] = ((s[i] == s[j]) && mat[i + 1][j - 1]);
+				}
+			}
+		}
+		return mat;
+	}
+};
