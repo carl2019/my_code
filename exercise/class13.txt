@@ -1,0 +1,59 @@
+class Solution {
+public:
+    void solve(vector<vector<char>>& board) {
+        if(board.empty())
+            return;
+        
+        int row = board.size();
+        int col = board[0].size();
+        
+        //第一行 最后一行
+        for(int j = 0; j < col; ++j)
+        {
+            if(board[0][j] == 'O')
+                _solve(0, j, board, row, col);
+            if(board[row-1][j] == 'O')
+                _solve(row-1, j, board, row, col);
+        }
+        //第一列 最后一列
+        for(int i = 0; i < row; ++i)
+        {
+            if(board[i][0] == 'O')
+                _solve(i, 0, board, row, col);
+            if(board[i][col-1] == 'O')
+                _solve( i, col-1, board, row, col);
+        }
+        
+        for(int i = 0; i < row; ++i)
+        {
+            for(int j = 0; j < col; j++)
+            {
+                if(board[i][j] == 'O')
+                    board[i][j] = 'X';
+                else if(board[i][j] == '#')
+                    board[i][j] = 'O';
+            }
+        }
+    }
+   
+    void _solve(int x, int y, vector<vector<char>>& board, int row, int col)
+    {
+         static int pos[4][2] = {{0, 1}, {1, 0}, {0,-1}, {-1, 0}};
+        board[x][y] = '#';
+        
+        for(int i = 0; i < 4; ++i)
+        {
+            //从上下左右四个方向搜索
+            int nx = x + pos[i][0];
+            int ny = y + pos[i][1];
+            
+            //判断边界
+            if(nx < 0 || nx >= row || ny < 0 || ny >= col)
+                continue;
+            
+            if(board[nx][ny] != '#' && board[nx][ny] != 'X')
+                _solve(nx, ny, board, row, col);
+        }
+        
+    }
+};
