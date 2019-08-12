@@ -1,0 +1,57 @@
+//员工重要性
+class Solution {
+public:
+	int getImportance(vector<Employee*> employees, int id) {
+		int res = 0;
+		queue<int> q;
+		//初始化队列
+		q.push(id);
+		//把员工信息保存在map中，方便查询
+		unordered_map<int, Employee*> m;
+		for (auto e : employees)
+			m[e->id] = e;
+		//遍历队列
+		while (!q.empty()) {
+			int t = q.front();
+			q.pop();
+			res += m[t]->importance;
+			for (int num : m[t]->subordinates) {
+				q.push(num);
+			}
+		}
+		return res;
+	}
+};
+
+//电话号码的字母组合
+static string mapString[] = { "", "", "abc", "def", "ghi", "jkl", "mno",
+"pqrs", "tuv", "wxyz" };
+class Solution {
+public:
+	void backTrace(string& digits, vector<string>& ret, string curStr, int curDepth)
+	{
+		//边界，找到一种组合，放入数组中，结束此路径，向上回溯
+		if (curDepth == digits.size())
+		{
+			if (!curStr.empty())
+			{
+				ret.push_back(curStr);
+			}
+			return;
+		}
+		//找到当前字符在string映射表中的位置
+		int curMapIndex = digits[curDepth] - '0';
+		string curMap = mapString[curMapIndex];
+		//遍历每一种可能的组合
+		for (auto& ch : curMap)
+		{
+			backTrace(digits, ret, curStr + ch, curDepth + 1);
+		}
+	}
+	vector<string> letterCombinations(string digits)
+	{
+		vector<string> ret;
+		backTrace(digits, ret, "", 0);
+		return ret;
+	}
+};
