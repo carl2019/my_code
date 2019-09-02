@@ -1,0 +1,110 @@
+struct ListNode* removeElements(struct ListNode* head, int val) {
+    struct ListNode* prev = NULL;
+    struct ListNode* cur = head;
+    struct ListNode* next;
+    while(cur)
+    {
+        //当前节点是否是要删除的节点
+        if(cur->val == val)
+        {
+            //先获取下一个节点
+            next = cur->next;
+            //把当前节点的内容释放
+            free(cur);
+            //
+            cur = next;
+            //重新
+            if(prev == NULL)
+            {
+                head = next;
+            }
+            else
+            {
+                prev->next = next;
+            }
+        }
+        else
+        {
+            //当前节点不是要删除的节点
+            //
+            prev = cur;
+            cur = cur->next;
+        }
+    }
+    return head;
+}
+
+struct ListNode* reverseList(struct ListNode* head) {
+    struct ListNode* prev= NULL;
+    struct ListNode* cur= head;
+    struct ListNode* next;
+    while(cur)
+    {
+        //先获取下一个节点
+        next = cur->next;
+        //更改当前节点的指向
+        cur->next = prev;
+        prev = cur;
+        cur = next;
+    }
+    return prev;
+    
+}
+
+
+struct ListNode* middleNode(struct ListNode* head) {
+    struct ListNode* cur = head;
+    int count = 0;
+    int mid = 0;
+    //统计节点的个数
+    while(cur)
+    {
+        count++;
+        cur = cur->next;
+    }
+    mid = count/2;
+    while(mid--)
+    {
+        cur = head;
+        cur = cur->next;
+    }
+    return cur;
+    
+}
+
+struct ListNode* middleNode(struct ListNode* head) {
+    struct ListNode* slow = head;
+    struct ListNode* fast = head;
+    while(fast && fast->next)
+    {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+
+class Solution {
+public:
+    ListNode* FindKthToTail(ListNode* pListHead, unsigned int k) {
+        ListNode* fast = pListHead;
+        ListNode* slow = fast;
+        while(k--)
+        {
+            if(fast)
+            {
+                fast = fast->next;
+            }
+            else
+            {
+                return NULL;
+            }
+        }
+        while(fast)
+        {
+            fast = fast->next;
+            slow = slow->next;
+        }
+        return slow;
+    }
+};
